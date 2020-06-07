@@ -50,7 +50,24 @@ def top_words(source, number):
         for line in f:
             words = rgx.findall(line)
             for w in words:
-                # FIXME: Complete this function
+                w = w.lower()
+                if ht.contains_key(w):
+                    ht.put(w, ht.get(w)+1)
+                else:
+                    ht.put(w, 1)
 
+    # Get list of tuples for hash_map.py and sort by value
+    count_list = ht.hash_list()
+    for i in range(0, len(count_list)-1):
+        for j in range(0, len(count_list)-i-1):
+            if count_list[j][1] < count_list[j+1][1]:
+                count_list[j], count_list[j+1] = count_list[j+1], count_list[j]
 
-print(top_words("alice.txt",10))  # COMMENT THIS OUT WHEN SUBMITTING TO GRADESCOPE
+    # Get only the requested number of top results
+    top_res = []
+    for i in range(0, number):
+        top_res.append(count_list[i])
+
+    return top_res
+
+#print(top_words("alice.txt",10))  # COMMENT THIS OUT WHEN SUBMITTING TO GRADESCOPE

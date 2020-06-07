@@ -252,6 +252,23 @@ class HashMap:
         load_factor = self.size / self.capacity
         return load_factor
 
+    def hash_list(self):
+        """
+        Returns:
+            A list of hash tuples
+        """
+        hash_list = []
+        for i in range(0, len(self._buckets)):
+            if self._buckets[i].head is None:
+                continue
+            else:
+                cur = self._buckets[i].head
+                while cur is not None:
+                    temp = (cur.key, cur.value)
+                    hash_list.append(temp)
+                    cur = cur.next
+        return hash_list
+
     def __str__(self):
         """
         Prints all the links in each of the buckets in the table.
@@ -263,9 +280,3 @@ class HashMap:
             out = out + str(index) + ': ' + str(bucket) + '\n'
             index = index + 1
         return out
-
-
-
-
-
-

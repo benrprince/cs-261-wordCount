@@ -44,7 +44,6 @@ def get_top_words_standard(source, number):
     for i in range(len(totals)):
         totals[i] = (totals[i][1], totals[i][0])
     # totals = (key, value) sorted by value
-
     return totals[:number]
 
 
